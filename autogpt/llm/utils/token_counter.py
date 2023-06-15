@@ -44,6 +44,14 @@ def count_message_tokens(
     elif model == "gpt-4-0314":
         tokens_per_message = 3
         tokens_per_name = 1
+    elif model == "gpt-3.5-turbo-16k":
+    # Handle gpt-3.5-turbo-16k the same way as gpt-3.5-turbo-0301
+        tokens_per_message = 4  # every message follows {role/name}\n{content}\n
+        tokens_per_name = -1  # if there's a name, the role is omitted
+    elif model == "gpt-3.5-turbo-16k-0613":
+        # Handle gpt-3.5-turbo-16k-0613 the same way as gpt-3.5-turbo-0301
+        tokens_per_message = 4  # every message follows {role/name}\n{content}\n
+        tokens_per_name = -1  # if there's a name, the role is omitted
     else:
         raise NotImplementedError(
             f"num_tokens_from_messages() is not implemented for model {model}.\n"
